@@ -1,0 +1,4 @@
+Flask-WTF==1.2.1
+flask==3.0.3
+pillow==10.4.0
+tensorflow==2.16.1
