@@ -1,13 +1,14 @@
+import os
+from wtforms.validators import DataRequired
+from wtforms import FileField, SubmitField
+from flask_wtf import FlaskForm
 from flask import Flask, render_template, request, redirect, flash, url_for
 from werkzeug.utils import secure_filename
 import tensorflow as tf
+from tensorflow import keras
 import numpy as np
-from tensorflow.keras.models import load_model
 from PIL import Image
-from flask_wtf import FlaskForm
-from wtforms import FileField, SubmitField
-from wtforms.validators import DataRequired
-import os
+
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -19,11 +20,12 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 # Load your trained model
-scratch_model = load_model("models/scratch.keras")
-resnet_model = load_model("models/resnet-basic.keras")
-resnet_tuned_model = load_model("models/resnet-tuned.keras")
-vgg_model = load_model("models/vgg16_final_model.keras")
-effnet_model = load_model("models/effnet.keras")
+scratch = keras.models.load_model("models/scratch.keras")
+resnet = keras.models.load_model("models/resnet-basic.keras")
+resnet_tuned = keras.models.load_model("models/resnet-tuned.keras")
+vgg = keras.models.load_model("models/vgg16_final.keras")
+effnet = keras.models.load_model("models/effnet-basic.keras")
+effnet_tuned = keras.models.load_model("models/effnet-tuned.keras")
 
 # Assuming your model has a property for class names
 class_names = ("glioma", "meningioma", "notumor", "pituitary")
@@ -50,14 +52,6 @@ def prepare_image(image_path):
     return img_array
 
 
-def prepare_effnet(image_path):
-    img = Image.open(image_path)
-    # Resize to match the model input shape (150x150)
-    img = img.resize((150, 150))
-    img_array = np.expand_dims(np.array(img), axis=0)  # Add batch dimension
-    return img_array
-
-
 def predict_tumor(model, img, name):
     prediction = model.predict(img)
     predicted_class = np.argmax(
@@ -72,6 +66,21 @@ def predict_tumor(model, img, name):
         f"""{name}: {predicted_label} \t|\tConfidence: {
             confidence}%""",
         "success",
+    )
+    return predicted_class[0]
+
+
+def ensemble_prediction(ensemble_outputs):
+    ensemble_pred = round(np.mean(ensemble_outputs))
+    ensemble_confidence = np.round(
+        ensemble_outputs.count(ensemble_pred) * 100 / len(ensemble_outputs), 2
+    )
+    predicted_label = class_names[ensemble_pred]
+    print(ensemble_pred, ensemble_confidence, predicted_label)
+    flash(
+        f"""Ensemble: {predicted_label} \t|\tConfidence: {
+            ensemble_confidence}%""",
+        "info",
     )
 
 
@@ -91,18 +100,27 @@ def index():
             file.save(file_path)
 
             img_array = prepare_image(file_path)
-            img_array2 = prepare_effnet(file_path)
 
-            predict_tumor(scratch_model, img_array, "Model from scratch")
+            scratch_pred = predict_tumor(scratch, img_array, "Model from scratch")
+            resnet_pred = predict_tumor(resnet, img_array, "ResNet50")
+            resnet_tuned_pred = predict_tumor(resnet_tuned, img_array, "ResNet50 Tuned")
+            vgg_pred = predict_tumor(vgg, img_array, "VGG16")
+            effnet_pred = predict_tumor(effnet, img_array, "EfficientNetB0")
+            effnet_tuned_pred = predict_tumor(
+                effnet_tuned, img_array, "EfficientNetB0 Tuned"
+            )
 
-            predict_tumor(resnet_model, img_array, "ResNet")
+            ensemble_outputs = [
+                scratch_pred,
+                resnet_pred,
+                resnet_tuned_pred,
+                vgg_pred,
+                effnet_pred,
+                effnet_tuned_pred,
+            ]
+            print(ensemble_outputs)
 
-            predict_tumor(resnet_tuned_model, img_array, "ResNet Tuned")
-
-            predict_tumor(effnet_model, img_array2, "Effnet")
-
-            predict_tumor(vgg_model, img_array, "VGG16")
-
+            ensemble_prediction(ensemble_outputs)
             return redirect(url_for("index"))
         else:
             flash("File not allowed or invalid format", "danger")

@@ -2,201 +2,215 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Brain Tumor Detection</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f8f9fa;
-            color: #343a40;
-            padding: 2%;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brain Tumor Detection</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    body {
+      font-family: "Montserrat", sans-serif;
+      background-color: #f8f9fa;
+      color: #343a40;
+      padding: 2%;
+    }
 
-        .main-heading {
-            padding: 5%;
-            text-align: center;
-            background-color: #c4d6e5;
-            color: #5a6c7e;
-            font-size: 3rem;
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 600;
-            border-radius: 15px;
-        }
+    .main-heading {
+      padding: 5%;
+      text-align: center;
+      background-color: #c4d6e5;
+      color: #5a6c7e;
+      font-size: 3rem;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      border-radius: 15px;
+    }
 
-        .BTD-desc {
-            font-size: 1.5rem;
-            line-height: 1.6;
-            padding: 3%;
-            background-color: #e2d3e4;
-            color: #6b5b72;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 400;
-            border-radius: 15px;
-        }
+    .BTD-desc {
+      font-size: 1.5rem;
+      line-height: 1.6;
+      padding: 3%;
+      background-color: #e2d3e4;
+      color: #6b5b72;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 400;
+      border-radius: 15px;
+    }
 
-        .main-wrapper {
-            padding: 2.5%;
-            color: #7a5d3b;
-            border-radius: 15px;
-        }
+    .main-wrapper {
+      padding: 2.5%;
+      color: #7a5d3b;
+      border-radius: 15px;
+    }
 
-        .project-desc {
-            padding: 2.5%;
-            background-color: #fff;
-            color: #677545;
-            border-radius: 15px;
-            max-width: 85%;
-            margin: 0 auto;
-        }
+    .project-desc {
+      padding: 2.5%;
+      background-color: #fff;
+      color: #677545;
+      border-radius: 15px;
+      max-width: 85%;
+      margin: 0 auto;
+    }
 
-        .project-image {
-            height: auto;
-            width: 100%;
-            border-radius: 15px;
-        }
+    .project-image {
+      height: auto;
+      width: 100%;
+      border-radius: 15px;
+    }
 
-        .project-heading {
-            padding: 0% 5% 0% 2.5%;
-            text-align: center;
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 600;
-            font-size: 2rem;
-        }
+    .project-heading {
+      padding: 0% 5% 0% 2.5%;
+      text-align: center;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      font-size: 2rem;
+    }
 
-        .bottom-section {
-            padding: 2.5% 5% 2.5% 2.5%;
-            background-color: #d9c6e5;
-            color: #5d4a72;
-            border-radius: 15px;
-        }
+    .bottom-section {
+      padding: 2.5% 5% 2.5% 2.5%;
+      background-color: #d9c6e5;
+      color: #5d4a72;
+      border-radius: 15px;
+    }
 
-        .group-members {
-            padding: 3%;
-            background-color: #e5d6c6;
-            color: #6e5a4a;
-            border-radius: 15px;
-        }
+    .group-members {
+      padding: 3%;
+      background-color: #e5d6c6;
+      color: #6e5a4a;
+      border-radius: 15px;
+    }
 
-        .proj-heading {
-            padding-left: 5%;
-            padding-right: 5%;
-            text-align: center;
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 400;
-            font-size: 2rem;
-        }
+    .proj-heading {
+      padding-left: 5%;
+      padding-right: 5%;
+      text-align: center;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 400;
+      font-size: 2rem;
+    }
 
-        .group-members-list {
-            display: flex;
-            justify-content: center;
-            padding-top: 5%;
-        }
+    .group-members-list {
+      display: flex;
+      justify-content: center;
+      padding-top: 5%;
+    }
 
-        .member {
-            font-size: 1.5rem;
-            line-height: 1.5;
-            font-weight: 600;
-            margin: 1rem;
-        }
+    .member {
+      font-size: 1.5rem;
+      line-height: 1.5;
+      font-weight: 600;
+      margin: 1rem;
+    }
 
-        .upload-files {
-            padding: 0% 5% 0% 2.5%;
-        }
+    .upload-files {
+      padding: 0% 5% 0% 2.5%;
+    }
 
-        .form-upload {
-            width: 50%;
-            text-align: center;
-        }
+    .form-upload {
+      width: 50%;
+      text-align: center;
+    }
 
-        .form-main {
-            padding: 0% 8% 2.5% 2.5%;
-            margin-left: 2%;
-            border-radius: 15px;
-        }
+    .form-main {
+      padding: 0% 8% 2.5% 2.5%;
+      margin-left: 2%;
+      border-radius: 15px;
+    }
 
-        .tumor-alert {
-            margin: 2.5%;
-            border-radius: 15px;
-        }
+    .tumor-alert {
+      margin: 2.5%;
+      border-radius: 15px;
+    }
 
-        .input-group {
-            border-radius: 15px;
-            overflow: hidden;
-        }
+    .input-group {
+      border-radius: 15px;
+      overflow: hidden;
+    }
 
-        .btn {
-            border-radius: 15px;
-        }
+    .btn {
+      border-radius: 15px;
+    }
 
-        .mt-5 {
-            margin-top: 5rem !important;
-        }
-    </style>
+    .mt-5 {
+      margin-top: 5rem !important;
+    }
+
+    .flash-font {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+  </style>
 </head>
 
 <body>
-    <section>
-        <h1 class="main-heading">Brain Tumor Detection</h1>
-        <p class="BTD-desc text-center">Using advanced CNN models to detect brain tumors from MRI scans.</p>
-    </section>
+  <section>
+    <h1 class="main-heading">Brain Tumor Detection</h1>
+    <p class="BTD-desc text-center">
+      Using advanced CNN models to detect brain tumors from MRI scans.
+    </p>
+  </section>
 
-    <section id="PROJECT_DESCRIPTION" class="container my-5">
-        <div class="main-wrapper">
-            <div class="row">
-                <div class="col-lg-6">
-                    <img class="project-image" src="{{ url_for('static', filename='assets/tumor_scan.jpg') }}" alt="Brain Tumor Scan">
-                </div>
-                <div class="col-lg-6 d-flex align-items-center">
-                    <div class="project-desc">
-                        <h2 class="project-heading">Our Approach</h2>
-                        <p>We use Convolutional Neural Networks (CNN) to analyze MRI scans, distinguishing between healthy and tumor-affected tissues with high accuracy.</p>
-                    </div>
-                </div>
-            </div>
+  <section id="PROJECT_DESCRIPTION" class="container my-5">
+    <div class="main-wrapper">
+      <div class="row">
+        <div class="col-lg-6">
+          <img class="project-image" src="{{ url_for('static', filename='assets/tumor_scan.jpg') }}"
+            alt="Brain Tumor Scan" />
         </div>
-    </section>
-
-    <section id="UPLOADING_FILES_AREA" class="container text-center mt-5">
-        <h2 class="project-heading">Upload Your MRI</h2>
-        <p class="BTD-desc">Get a prediction instantly with our CNN model.</p>
-        <form method="POST" action="" class="form-main" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-            <div class="input-group justify-content-center">
-                {{ form.file(class="form-control") }}
-                <button type="submit" class="btn btn-success ms-2">Analyze</button>
-            </div>
-        </form>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <div class="mt-3">
-            {% for category, message in messages %}
-            <div class="alert alert-{{ category }} tumor-alert alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            {% endfor %}
+        <div class="col-lg-6 d-flex align-items-center">
+          <div class="project-desc">
+            <h2 class="project-heading">Our Approach</h2>
+            <p>
+              We use Convolutional Neural Networks (CNN) to analyze MRI scans,
+              distinguishing between healthy and tumor-affected tissues with
+              high accuracy.
+            </p>
+          </div>
         </div>
-        {% endif %}
-        {% endwith %}
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <section class="container group-members text-center mt-5">
-        <h3 class="proj-heading">Team Members</h3>
-        <ul class="group-members-list">
-            <li class="member">Prathamesh Mhatre</li>
-            <li class="member">Raj Nikam</li>
-            <li class="member">Bhushan Khopkar</li>
-            <li class="member">Gaurav Kolambe</li>
-        </ul>
-    </section>
+  <section id="UPLOADING_FILES_AREA" class="container text-center mt-5">
+    <h2 class="project-heading">Upload Your MRI</h2>
+    <p class="BTD-desc">Get a prediction instantly with our CNN model.</p>
+    <form method="POST" action="" class="form-main" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+      <div class="input-group justify-content-center">
+        {{ form.file(class="form-control") }}
+        <button type="submit" class="btn btn-success ms-2">Analyze</button>
+      </div>
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <div class="mt-3">
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }} tumor-alert alert-dismissible fade show flash-font" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+  </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+  <section class="container group-members text-center mt-5">
+    <h3 class="proj-heading">Team Members</h3>
+    <ul class="group-members-list">
+      <li class="member">Prathamesh Mhatre</li>
+      <li class="member">Raj Nikam</li>
+      <li class="member">Bhushan Khopkar</li>
+      <li class="member">Gaurav Kolambe</li>
+    </ul>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
