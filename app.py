@@ -9,7 +9,6 @@ from tensorflow import keras
 import numpy as np
 from PIL import Image
 
-
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = "5555555555"  # Change this to a random secret key
@@ -33,16 +32,13 @@ class_names = ("glioma", "meningioma", "notumor", "pituitary")
 # Allowed file extensions
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
-
 # Create a form class
 class UploadForm(FlaskForm):
     file = FileField("Image File", validators=[DataRequired()])
     submit = SubmitField("Upload")
 
-
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
 def prepare_image(image_path):
     img = Image.open(image_path)
@@ -50,7 +46,6 @@ def prepare_image(image_path):
     img = img.resize((128, 128))
     img_array = np.expand_dims(np.array(img), axis=0)  # Add batch dimension
     return img_array
-
 
 def predict_tumor(model, img, name):
     prediction = model.predict(img)
@@ -69,7 +64,6 @@ def predict_tumor(model, img, name):
     )
     return predicted_class[0]
 
-
 def ensemble_prediction(ensemble_outputs):
     ensemble_pred = round(np.mean(ensemble_outputs))
     ensemble_confidence = np.round(
@@ -83,11 +77,9 @@ def ensemble_prediction(ensemble_outputs):
         "info",
     )
 
-
 def softmax(x):
     exp_x = np.exp(x - np.max(x))
     return exp_x / exp_x.sum(axis=1, keepdims=True)
-
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -128,7 +120,6 @@ def index():
 
     # Pass the form to the template
     return render_template("index.html", form=form)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
