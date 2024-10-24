@@ -3,3 +3,5 @@ __pycache__
 models/
 data/
 uploads/
+Test/
+.DS_Store/
